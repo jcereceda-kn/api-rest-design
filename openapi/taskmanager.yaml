@@ -22,6 +22,7 @@ tags:
 paths:
   /tasks:
     get:
+      operationId: obtenerTareas
       tags:
         - Tasks
       summary: Obtener todas las tareas
@@ -35,8 +36,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
     post:
+      operationId: crearTareas
       tags:
         - Tasks
       summary: Crear una nueva tarea
@@ -64,6 +72,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
+        '400':
+          description: Error de validación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 
 components:
   schemas:
@@ -111,3 +126,12 @@ components:
         details:
           type: string
           example: "The field 'title' is required"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
