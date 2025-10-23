@@ -22,7 +22,6 @@ tags:
 paths:
   /tasks:
     get:
-      operationId: obtenerTareas
       tags:
         - Tasks
       summary: Obtener todas las tareas
@@ -36,6 +35,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
+            
+              examples: 
+                ejemplo:
+                  value:
+                    - id: "1"
+                      title: "Mock desde OpenAPI"
+                      status: "todo"
         '400':
           description: Error de validación
           content:
@@ -44,7 +50,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 
     post:
-      operationId: crearTareas
       tags:
         - Tasks
       summary: Crear una nueva tarea
@@ -72,6 +77,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
+            
+              examples: 
+                ejemplo:
+                  value:
+                    id: "1"
+                    title: "Mock desde OpenAPI"
+                    status: "todo"
+                    createdAt: "2025-01-01T10:00:00Z"
         '400':
           description: Error de validación
           content:
@@ -126,12 +139,3 @@ components:
         details:
           type: string
           example: "The field 'title' is required"
-
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-security:
-  - bearerAuth: []
