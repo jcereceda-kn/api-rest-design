@@ -14,7 +14,59 @@ servers:
     description: Servidor local de desarrollo
   - url: https://staging.api.taskmanager.dev/v1
     description: Servidor de staging
-paths: {}
+
 tags:
   - name: Tasks
     description: Operaciones relacionadas con la gestión de tareas
+    
+paths:
+  /tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Obtener todas las tareas
+      description: Devuelve una lista de tareas registradas
+      responses:
+        '200':
+          description: Lista de tareas obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: "1"
+                    title:
+                      type: string
+                      example: "Aprender OpenAPI"
+                    status:
+                      type: string
+                      example: "todo"
+
+    post:
+      tags:
+        - Tasks
+      summary: Crear una nueva tarea
+      description: Crea una nueva tarea a partir de los datos enviados
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - status
+              properties:
+                title:
+                  type: string
+                  example: "Preparar curso de OpenAPI"
+                status:
+                  type: string
+                  example: "todo"
+      responses:
+        '201':
+          description: Tarea creada correctamente. Se devuelve el ID de la tarea creada.
