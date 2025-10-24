@@ -9,5 +9,8 @@ export const notFound = (req, res, next) => {
 
 export const errorHandler = (err, req, res, next) => {
   console.error("Error:", err.message);
-  res.status(500).json({ error: "Internal server error" });
+  // Si viene de Mongoose con validación, 400; si no, 500 genérico
+  const isValidation = err?.name === "ValidationError" || err?.name === "CastError";
+  const status = isValidation ? 400 : 500;
+  res.status(status).json({ error: isValidation ? "Invalid data" : "Internal server error", details: err.message });
 };
