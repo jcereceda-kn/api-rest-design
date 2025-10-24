@@ -10,7 +10,7 @@ info:
     name: MIT
     url: https://opensource.org/licenses/MIT
 servers:
-  - url: http://localhost:3000/v1
+  - url: https://verbose-succotash-97xq7wr7wwqj375q9-3000.app.github.dev/
     description: Servidor local de desarrollo
   - url: https://staging.api.taskmanager.dev/v1
     description: Servidor de staging
@@ -70,6 +70,9 @@ paths:
                 status:
                   type: string
                   example: "todo"
+                priority:
+                  type: string
+                  example: low
       responses:
         '201':
           description: Tarea creada correctamente. Se devuelve el ID de la tarea creada.

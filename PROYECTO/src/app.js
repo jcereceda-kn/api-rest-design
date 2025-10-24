@@ -1,6 +1,7 @@
 // src/app.js
 import express from "express";
 import { logger, notFound, errorHandler } from "./middlewares/basic.js";
+import taskRoutes from "./routes/taskRoutes.js";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 import path from "path";
@@ -38,7 +39,11 @@ app.get("/welcome", (req, res) => {
   res.json({ "message": "Welcome to Task Manager API" });
 });
 
+app.use("/tasks", taskRoutes);
+
 app.use(notFound);
 app.use(errorHandler);
+
+
 
 export default app;
